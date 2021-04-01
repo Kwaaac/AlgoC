@@ -4,6 +4,17 @@
 
 typedef struct _queue queue;
 
+typedef struct _link {
+    customer *c;
+    struct _link *next;
+} link;
+
+struct _queue {
+    link *first;
+    link *last;
+    int size;
+};
+
 /**
  * Create and return a pointer to a new queue.
  */
@@ -17,6 +28,8 @@ queue *create_q();
  * that remain in the queue.
  */
 void free_q(queue *q);
+
+void display_list(link *lst);
 
 /**
  * Return the current size of the queue.
