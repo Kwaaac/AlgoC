@@ -165,8 +165,26 @@ link *merge_rec(link * lst1, link *lst2){
     }
 }
 
-link *merge_sort(link *lst){
+void split_list(link* lst1, link* lst2){
+    int size, i;
+    link* ptr = lst1;
 
+    if(lst1 == NULL){
+        return;
+    }
+
+    for(size = 0; ptr != NULL; size++, ptr = ptr->next){}
+    for(i = 0, ptr = lst1; i < size; i++, ptr = ptr->next){}
+
+    lst2 = ptr->next;
+    ptr->next = NULL;
+}
+
+link *merge_sort(link *lst){
+    link *lst2 = NULL;
+    split_list(lst, lst2);
+
+    return merge(merge_sort(lst), merge_sort(lst2));
 }
 
 int main() {
